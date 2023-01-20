@@ -4,13 +4,23 @@ import {
     BusinessPartner
 } from '../../services/business-partner-service';
 
+
 @Injectable()
 export class BusinessPartnerService {
     async getAllBusinessPartners(): Promise<BusinessPartner[]> {
 
         const { businessPartnerApi } = businessPartnerService();
-        return await businessPartnerApi.requestBuilder().getAll().execute({
-            url: "http://localhost:8081/"
-        });
+        return await businessPartnerApi
+            .requestBuilder()
+            .getAll()
+            .select(
+                businessPartnerApi.schema.BUSINESS_PARTNER,
+                businessPartnerApi.schema.FIRST_NAME,
+                businessPartnerApi.schema.LAST_NAME
+            )
+            .top(10)
+            .addCustomHeaders({ apikey: process.env.APIKEY }).execute({
+                destinationName: process.env.DESTINATION_NAME
+            });
     }
 }

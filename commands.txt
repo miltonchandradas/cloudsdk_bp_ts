@@ -16,3 +16,9 @@ GENERATE SERVICE ENTITIES:
 ----------------------------------------------------------------------------------------
 npm install -D @sap-cloud-sdk/generator
 npx generate-odata-client --inputDir service-specifications --outputDir services
+
+SETUP & DEPLOY:
+----------------------------------------------------------------------------------------
+
+cf create-service destination lite mydestination
+cf create-service xsuaa application myxsuaa
