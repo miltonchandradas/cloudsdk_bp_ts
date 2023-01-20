@@ -1,10 +1,18 @@
 INITIALIZE:
 ----------------------------------------------------------------------------------------
-
 nest new cloudsdk_bp_ts
-
 
 BUILD & RUN:
 ----------------------------------------------------------------------------------------
-
 npm run start
+
+ADD CUSTOM ROUTE:
+----------------------------------------------------------------------------------------
+nest g controller business-partner
+nest g service business-partner
+
+
+GENERATE SERVICE ENTITIES:
+----------------------------------------------------------------------------------------
+npm install -D @sap-cloud-sdk/generator
+npx generate-odata-client --inputDir service-specifications --outputDir services
