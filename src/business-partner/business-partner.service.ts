@@ -3,6 +3,7 @@ import {
     businessPartnerService,
     BusinessPartner
 } from '../../services/business-partner-service';
+import { resilience } from '@sap-cloud-sdk/resilience';
 
 
 @Injectable()
@@ -10,9 +11,11 @@ export class BusinessPartnerService {
     async getAllBusinessPartners(): Promise<BusinessPartner[]> {
 
         const { businessPartnerApi } = businessPartnerService();
+        
         return await businessPartnerApi
             .requestBuilder()
             .getAll()
+            .middleware(resilience({ timeout: 10000, circuitBreaker: true, retry: true }))
             .select(
                 businessPartnerApi.schema.BUSINESS_PARTNER,
                 businessPartnerApi.schema.FIRST_NAME,
@@ -20,7 +23,7 @@ export class BusinessPartnerService {
             )
             .top(10)
             .addCustomHeaders({ apikey: process.env.APIKEY }).execute({
-                destinationName: process.env.DESTINATION_NAME
+                url: process.env.URL
             });
     }
 }

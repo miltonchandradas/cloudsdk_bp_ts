@@ -23,7 +23,9 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
-    "@sap-cloud-sdk/odata-v2": "^2.14.0",
+    "@sap-cloud-sdk/http-client": "^3.0.0-20230121022840.0",
+    "@sap-cloud-sdk/odata-v2": "^3.0.0-20230121022840.0",
+    "@sap-cloud-sdk/resilience": "^3.0.0-20230121022840.0",
     "dotenv": "^16.0.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
